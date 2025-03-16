@@ -29,7 +29,8 @@ source ~/ros2_ws/install/setup.bash
 </details>
 
 ``` r
-ros2 launch ant_oxl launch_example1.launch.py
+ros2 run ant_oxl image_publisher
+ros2 run ant_oxl image_subscriber
 ```
 
 # Delete this part if you are using it as a template

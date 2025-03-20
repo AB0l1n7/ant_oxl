@@ -3,12 +3,15 @@ from rclpy.node import Node
 from sensor_msgs.msg import Image # Ros2 üzenet típus képekhez
 from cv_bridge import CvBridge # Biztosítja a Ros2 és opencv közötti átmenetet
 import cv2 # Képfeldolgozási könyvtár
+from ament_index_python.packages import get_package_share_directory
+import os
 
 class VideoPublisher(Node):
-    def __init__(self, video_source="/home/ajr/ros2_ws/src/ant_oxl/road_video.mp4"):  # video_source a videó elérési útja
+    def __init__(self, video_source):  # video_source a videó elérési útja
         super().__init__('video_publisher')
         self.publisher_ = self.create_publisher(Image, '/image', 10) # Létrehozza a publishert Image típusú üzenethez, a topic neve /image
         self.bridge = CvBridge() # Inicializálja a CvBridge objektumot
+
 
         # Videóforrás inicializálása
         self.cap = cv2.VideoCapture(video_source)
@@ -48,8 +51,10 @@ class VideoPublisher(Node):
 def main(args=None):
     rclpy.init(args=args) # Inicializálja a Ros2 környezetet
 
-    video_publisher = VideoPublisher("/home/ajr/ros2_ws/src/ant_oxl/road_video.mp4")  # Módosítani kell a fájl nevét szükség szerint
+    video_path = os.path.join(get_package_share_directory('ant_oxl'), 'road_video.mp4') # A megadott package share könyvtárának útját adja vissza.
 
+    video_publisher = VideoPublisher(video_path)
+    
     rclpy.spin(video_publisher)
 
     video_publisher.destroy_node()

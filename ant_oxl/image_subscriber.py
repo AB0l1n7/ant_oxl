@@ -13,7 +13,7 @@ class ImageSubscriber(Node):
             '/image',  # /image topicra iratkozunk fel
             self.listener_callback, # listener_callback függvény lesz meghívva új káp érkezésekor
             10)
-        
+        self.img_canny_pub_ = self.create_publisher(Image, '/canny_edges', 10)  # publikálás a /canny_edges topicba
         # Inicializálja CvBridge
         self.bridge = CvBridge()
 
@@ -32,10 +32,10 @@ class ImageSubscriber(Node):
        
         img = cv2.GaussianBlur(img, (5, 5), 1.4) # A hibák korrigálására elhomájosítjuk
 
-        edges = cv2.Canny(img, 100, 200) # Canny edge detectort alkalmazzuk
+        edges = cv2.Canny(img, 50, 150) # Canny edge detectort alkalmazzuk
 
-        cv2.imshow("Canny Edge Detection", edges) # Kijelzi a képet
-        cv2.waitKey(1)
+        msg_img = self.bridge.cv2_to_imgmsg(edges, encoding="mono8") # opencv formátum visszaalakítása ros2 üzenetté
+        self.img_canny_pub_.publish(msg_img) # A ros2 üzenet publikálása
 
 def main(args=None):
     rclpy.init(args=args) #Ros2 környezet inicializálása

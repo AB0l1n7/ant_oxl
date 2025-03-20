@@ -23,8 +23,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-                'image_publisher = ros2_py_template.image_publisher:main',
-                'image_subscriber = ros2_py_template.image_subscriber:main',
+                'image_publisher = ant_oxl.image_publisher:main',
+                'image_subscriber = ant_oxl.image_subscriber:main',
         ],
     },
 )

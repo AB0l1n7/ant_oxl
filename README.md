@@ -32,8 +32,10 @@ source ~/ros2_ws/install/setup.bash
 ros2 run ant_oxl image_publisher
 ros2 run ant_oxl image_subscriber
 ```
+# The video with lane detection can be seen with "rqt" visualization software, but it's just the most comfortable for me, not the only option.
 
 ![image](https://github.com/user-attachments/assets/26f7a686-c0b5-47f9-a6b8-dc1319803382)
 ![image](https://github.com/user-attachments/assets/91a7d7f2-622e-4501-8602-40d329810af8)
-![image](https://github.com/user-attachments/assets/eca0a282-c346-45c0-9a4f-3a1186063290)
+![image](https://github.com/user-attachments/assets/c8a797f3-afd1-4eab-985d-399c044504b7)
+
 
